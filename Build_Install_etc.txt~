@@ -1,0 +1,18 @@
+cd /media/Hitachi2GB/00NMML/glmp.ts/glmmLDTS
+R CMD build glmmLDTS
+R CMD INSTALL glmmLDTS_1.0.tar.gz
+
+
+#github
+cd "/media/Hitachi2GB/00NMML/glmp.ts/glmmLDTS_package"
+git add splmm/R
+git add splmm/man
+git commit -m 'set up GitHub repository'
+git push github.splmm_package master
+#to see an earlier version
+cd /media/Hitachi2GB/00NMML/RPackages/splmm_package/splmm/R
+git log splmm.R
+git show c742d1026aa031baf9409c0262b5bc944bb736d1:./covParmIni.R
+#first time to initialize GIT
+
+
