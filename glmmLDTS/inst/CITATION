@@ -1,0 +1,13 @@
+citHeader("To cite R/glmmpqLD in publications use:")
+
+citEntry(entry="article",
+	author = personList(person(c("Jay" "M."), "Ver Hoef"),  
+		person(c("Josh", "M."), "London"), person(c("Peter", "L."), "Boveng")),
+	title = "Fast computing of some generalized linear mixed pseudo-models with temporal autocorrelation",
+	year = 2010,
+	journal = "Computational Statistics",
+	volume = 25,
+	pages = "39-55",
+	textVersion = "Ver Hoef, J.M., London, J.M., and Boveng, P.L. (2010) Fast computing of some generalized linear mixed pseudo-models with temporal autocorrelation. Computational Statistics 25(1): 39 – 55. DOI: 10.1007/s00180-009-0160-1"
+)
+	
