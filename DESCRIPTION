@@ -3,7 +3,7 @@ Type: Package
 Title: Generalized Linear Mixed Models using quasi-psuedo likelihood for large data sets
 Version: 1.0
 Date: 2011-12-27
-Depends: MASS
+Depends: MASS,nlme
 Author: Jay Ver Hoef
 Maintainer: Jay Ver Hoef <jay.verhoef@noaa.gov>
 Description: Generalized Linear Mixed Models using quasi-psuedo likelihood for large data sets
