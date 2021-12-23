@@ -1,0 +1,2 @@
+export(glmmLDTS, glmmLDTS1, numeric.2.classes, estimate.glmp.ts, summary.glmmLDTS)
+import(MASS,nlme)
