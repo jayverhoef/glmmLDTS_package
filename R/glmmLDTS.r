@@ -24,6 +24,14 @@ glmmLDTS <- function(fixed.formula,
 	
 	# set the WARNINGS to NULL
 	WARNINGS <- NULL
+
+	# check that data are binomial if distribution = "binomial"
+	if(distribution == "binomial") {
+		response_data <- data[,response.col]
+		if(all(response_data%%1 == 0)) {
+			return("Distribution specified is binomial but non-integer data provided for response variable")
+		}
+	}
 	
 	# check for missing values in response.col, remove with warning
 	if(any(is.na(data[,response.col]))){
