@@ -21,18 +21,18 @@ glmmLDTS <- function(fixed.formula,
 	varlist <- as.character(attr(terms(fixed.formula, data = data),"variables"))
 	# get the name of the response variable
 	response.col <- varlist[2]
-	
+
 	# set the WARNINGS to NULL
 	WARNINGS <- NULL
 
 	# check that data are binomial if distribution = "binomial"
 	if(distribution == "binomial") {
 		response_data <- data[,response.col]
-		if(all(response_data%%1 == 0)) {
+		if(all(response_data%%1 > 0)) {
 			return("Distribution specified is binomial but non-integer data provided for response variable")
 		}
 	}
-	
+
 	# check for missing values in response.col, remove with warning
 	if(any(is.na(data[,response.col]))){
     data <- data[!is.na(data[,response.col]),]
@@ -95,7 +95,7 @@ glmmLDTS <- function(fixed.formula,
 
 	# sample size
 	n <- length(y)
-	
+
 	# if response variable is binomial with n trials change y to proportion
 	if(distribution == "binomial") {
 	  if(!is.null(trialscol)){
@@ -118,7 +118,7 @@ glmmLDTS <- function(fixed.formula,
 	dX <- sum(svd(X)$d>1e-10)
 
 	# Initial parameter estimates, fixed effects
-	
+
 	beta.hat <- rep(0, times = nXc)
 	if(distribution == "binomial") {
 	  beta.hat[1] <- log((sum(y)/sum(trialsvec))/
@@ -181,7 +181,7 @@ glmmLDTS <- function(fixed.formula,
 			timevec = timevec, dX = dX, n = n, EstMeth = EstMeth)
       psi.hat[i] <- psi.est$minimum
       }
-      
+
       stplp1 <- 0
       k.it <- 0
       while(stplp1 == 0) {
@@ -228,7 +228,7 @@ glmmLDTS <- function(fixed.formula,
         k.it <- k.it + 1
       }
       inner.iter2 <- cbind(inner.iter2, k.it)
-      
+
       #convergence criteria on the covariance parameters
 			psi.new <- c(exp(psi.hat))
 #			if( any(max(abs(psi.new - psi.current)/psi.current) < 1e-5 |
@@ -242,7 +242,7 @@ glmmLDTS <- function(fixed.formula,
 		}
 
 		# ----------- DONE LOOPING HERE ---------------------------
-		
+
 		# autocorrelation parameter, need to exponentiate as per
 		# estimation function
     alpha <- exp(psi.hat[1])
@@ -281,7 +281,7 @@ glmmLDTS <- function(fixed.formula,
 		std.err = bhat.se,
 		df = n - dX,
 		t.value = beta.hat/bhat.se,
-		prob.t = round(100000*(1- pt(abs(beta.hat/bhat.se), 
+		prob.t = round(100000*(1- pt(abs(beta.hat/bhat.se),
 			df = n - dX))*2)/100000
 		)
 	rownames(fixed.eff.est) <- colnames(X)
@@ -298,7 +298,7 @@ glmmLDTS <- function(fixed.formula,
 
 	  typeIII.hypoth <- hypoth(fixed.formula, data, log(c(alpha, S.parms)),
       grp.int, timevec, Z0, yt, A.5, Del.i, n.per.term)
-      
+
     xout <- list(
       dataset = data,
       WARNINGS = WARNINGS,
